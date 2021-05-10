@@ -17,7 +17,7 @@ public class PurchaseOrdersService {
 
 	ArrayList<PurchaseLine> PurchaseLineList = new ArrayList<PurchaseLine>();
 	PurchaseOrders purchaseorders= new PurchaseOrders();
-	Config config = new Config("http://192.168.1.12:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurchaseOrders");
+	Config config = new Config("http://192.168.1.11:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurchaseOrders");
 	
 	
 	public PurchaseOrders getOnePurchaseOrder(String idPurchaseOrder) {
