@@ -1,4 +1,4 @@
-package Ntlm;
+	package Ntlm;
 
 import java.io.File;
 import java.io.IOException;

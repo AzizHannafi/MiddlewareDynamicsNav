@@ -13,7 +13,7 @@ import Ntlm.NtlmTransport;
 
 public class ItemService {
 
-	Config config = new Config("http://192.168.1.11:7047/BC130/WS/CRONUS%20France%20S.A./Page/ListItem");
+	Config config = new Config("http://192.168.1.4:7047/BC130/WS/CRONUS%20France%20S.A./Page/ListItem");
 	List<Item> listItem = new ArrayList<Item>();
 	public Item getOneItem(String idItem) {
 		Item item = new Item();
@@ -45,18 +45,23 @@ public class ItemService {
 					 httpTransport.call("urn:microsoft-dynamics-schemas/page/listitem:Read", soapEnvelope);
 					 //recuperation de la reponce 
 					result = (SoapObject) soapEnvelope.getResponse();
-					item.setKey(result.getProperty("Key").toString());
-					item.setDescription(result.getProperty("Description").toString());
-					item.setNo(result.getProperty("No").toString());
-					item.setInventory(result.getProperty("Inventory").toString());
-					item.setBase_Unit_of_Measure(result.getProperty("Base_Unit_of_Measure").toString());
-					
-					
-					System.out.println("The getOneItem methode have been requested successfully Congrats ;)");
+					if (result!=null) {
+						item.setKey(result.getProperty("Key").toString());
+						item.setDescription(result.getProperty("Description").toString());
+						item.setNo(result.getProperty("No").toString());
+						item.setInventory(result.getProperty("Inventory").toString());
+						item.setBase_Unit_of_Measure(result.getProperty("Base_Unit_of_Measure").toString());
+						
+						System.out.println("The getOneItem methode have been requested successfully Congrats ;)");
+					}else {
+						item.setNo("null");
+						System.out.println("Error in retreiving data because item not found");
+					}
+				
 					
 				} catch (Exception e) {
 					// TODO: handle exception
-					System.out.println("Error in retreiving item");
+					System.out.println("Error in retreiving item ");
 				}
 		return item;
 	}
@@ -120,8 +125,6 @@ public class ItemService {
 		
 			
 			//System.out.println("result size:"+result.getPropertyCount());
-			
-			
 			System.out.println("The getAllItems methode have been requested successfully Congrats ;)");
 		} catch (Exception e) {
 			// TODO: handle exception
