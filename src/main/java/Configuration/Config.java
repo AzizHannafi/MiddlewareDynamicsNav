@@ -21,6 +21,15 @@ public  class Config {
 		super();
 	}
 
+	public Config(String url, String login, String pwd) {
+		super();
+		this.url = url;
+		this.login = login;
+		this.pwd = pwd;
+		this.domaine="http://desktop-91llbl1:7047/BC130/WS/";
+		this.worksattion="";
+	}
+
 	//here the configuration of username, domaine, password and workstation that's allow you to authentificate as Ntlm 
 	public Config(String url) {
 		super();

@@ -13,7 +13,7 @@ import Ntlm.NtlmTransport;
 
 public class ItemService {
 
-	Config config = new Config("http://192.168.1.4:7047/BC130/WS/CRONUS%20France%20S.A./Page/ListItem");
+	Config config = new Config("http://172.16.23.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/ListItem");
 	List<Item> listItem = new ArrayList<Item>();
 	public Item getOneItem(String idItem) {
 		Item item = new Item();

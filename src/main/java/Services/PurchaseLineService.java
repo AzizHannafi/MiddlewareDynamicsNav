@@ -13,7 +13,7 @@ import Entity.PurchaseLine;
 import Ntlm.NtlmTransport;
 
 public class PurchaseLineService {
-	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurechaseLine");
+	Config config = new Config("http://172.16.23.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurechaseLine");
 	ArrayList<PurchaseLine> PurchaseLineList = new ArrayList<PurchaseLine>();
 	
 	
@@ -136,8 +136,6 @@ public class PurchaseLineService {
 
 	public void deletePurchaseLine(Key key) {
 		SoapObject result;
-		
-		
 		
 		//creation de l'envelope soap
 		SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
