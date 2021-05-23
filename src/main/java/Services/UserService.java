@@ -67,7 +67,14 @@ public class UserService {
 				 User.setUsername(infoUser.getProperty("Username").toString());
 				 User.setPassword(infoUser.getProperty("Password").toString());
 				 User.setLocationCode(infoUser.getProperty("LocationCode").toString());
-				 
+				System.out.println("Welcome "+infoUser.getProperty("Username").toString()); 
+			 }else {
+				 System.out.println("Password or Username is incorrect"); 
+				 User.setId("null");
+				 User.setLastname("null");
+				 User.setUsername("null");
+				 User.setPassword("null");
+				 User.setLocationCode("null");
 			 }
 			
 		} catch (Exception e) {
@@ -130,7 +137,14 @@ public class UserService {
 					 User.setUsername(infoUser.getProperty("Username").toString());
 					 User.setPassword(infoUser.getProperty("Password").toString());
 					 User.setLocationCode(infoUser.getProperty("LocationCode").toString());
-					 
+					 System.out.println("this user is  "+infoUser.getProperty("Username").toString()); 
+				 }else {
+					 System.out.println("ID user is incorrect"); 
+					 User.setId("null");
+					 User.setLastname("null");
+					 User.setUsername("null");
+					 User.setPassword("null");
+					 User.setLocationCode("null");
 				 }
 		} catch (Exception e) {
 			System.out.println("Error in fetching data");

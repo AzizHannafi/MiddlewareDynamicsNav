@@ -17,13 +17,13 @@ public class UserController {
 	
 	UserService userservice = new UserService();
 	
-	@RequestMapping(value = "/Login",method = RequestMethod.GET)
+	@RequestMapping(value = "/Login",method = RequestMethod.POST)
 	public User authenticate(@RequestBody User user) {
 		return userservice.authentificate(user);
 	}
 	
 	
-	@RequestMapping(value = "/GetUserByID/{idUser}",method = RequestMethod.GET)
+	@RequestMapping(value = "/GetUserByID/{idUser}",method = RequestMethod.POST)
 	public User getUserByID(@PathVariable("idUser") int idUser) {
 		return userservice.getUserByID(idUser);
 	}
