@@ -35,4 +35,9 @@ public class PurchaseOrdersController {
 	public void DeletePurchaseOrders(@RequestBody Key key) {
 		purchaseordersservice.deletePurchaseOrders(key);
 	}
+	
+	@RequestMapping(value = "/UpdateStatus/{idPurchaseOrder}/{status}",method = RequestMethod.PUT)
+	public void UpdateStatus(@PathVariable("idPurchaseOrder") String idPurchaseOrder,@PathVariable("status") String status) {
+		purchaseordersservice.updateStatus(idPurchaseOrder,status);
+	}
 }

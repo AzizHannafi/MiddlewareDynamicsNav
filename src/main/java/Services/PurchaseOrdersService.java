@@ -17,7 +17,7 @@ public class PurchaseOrdersService {
 
 	ArrayList<PurchaseLine> PurchaseLineList = new ArrayList<PurchaseLine>();
 	PurchaseOrders purchaseorders= new PurchaseOrders();
-	Config config = new Config("http://192.168.1.10:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurchaseOrders");
+	Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurchaseOrders");
 	
 	
 	public PurchaseOrders getOnePurchaseOrder(String idPurchaseOrder) {
@@ -26,11 +26,12 @@ public class PurchaseOrdersService {
 		SoapObject result;
 		
 		String 
-		   Key=null,
-		   No=null,
-		   Buy_from_Vendor_No=null,
-		   Buy_from_Vendor_Name=null,
-		   Posting_Description=null;
+		   Key="null",
+		   No="null",
+		   Buy_from_Vendor_No="null",
+		   Buy_from_Vendor_Name="null",
+		   Posting_Description="null",
+		   Status="null";
 		//creation de l'envelope soap
 		SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		soapEnvelope.dotNet = true;
@@ -52,45 +53,64 @@ public class PurchaseOrdersService {
 	    httpTransport.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		httpTransport.debug = true;
 		try {
-			 httpTransport.call("urn:microsoft-dynamics-schemas/page/purchaseorders:Read", soapEnvelope);
+			httpTransport.call("urn:microsoft-dynamics-schemas/page/purchaseorders:Read", soapEnvelope);
 			 result=(SoapObject)soapEnvelope.getResponse();
-			 if(result.hasProperty("Key")==true) {
-				 Key=result.getProperty("Key").toString();
-				};
-			 if(result.hasProperty("No")==true) {
-					No=result.getProperty("No").toString();
-				};
-			if(result.hasProperty("Buy_from_Vendor_No")==true) {
-				Buy_from_Vendor_No=result.getProperty("Buy_from_Vendor_No").toString();
-				};
-			if(result.hasProperty("Buy_from_Vendor_Name")==true) {
-				Buy_from_Vendor_Name=result.getProperty("Buy_from_Vendor_Name").toString();
-				};
-			if(result.hasProperty("Posting_Description")==true) {
-				Posting_Description=result.getProperty("Posting_Description").toString();
-				};
-			SoapObject tableLine=(SoapObject) result.getProperty("PurchLines");
-			System.out.println("size of sales line is :"+tableLine.getPropertyCount());
-			for(int j=0;j<tableLine.getPropertyCount();j++) {
-				PurchaseLine pl = new PurchaseLine();
-				SoapObject resTable= (SoapObject)tableLine.getProperty(j);
+			 if(result==null) {
+				 purchaseorders.setBuy_from_Vendor_Name(Buy_from_Vendor_Name);
+				 purchaseorders.setBuy_from_Vendor_No(Buy_from_Vendor_No);
+				 purchaseorders.setKey(Key);
+				 purchaseorders.setNo(No);
+				 purchaseorders.setPosting_Description(Posting_Description);
+				 purchaseorders.setStatus(Status);
+				 purchaseorders.setPurchLines(null);
+				 System.out.println("reponse est null");
+			 }else {
+				 if(result.hasProperty("No")==true) {
+						No=result.getProperty("No").toString();
+					};
+				 if(result.hasProperty("Key")==true) {
+					 Key=result.getProperty("Key").toString();
+					};
 				
-				pl.setKey(((SoapObject) tableLine.getProperty(j)).getProperty("Key").toString());
-				pl.setLine_No(((SoapObject) tableLine.getProperty(j)).getProperty("Line_No").toString());
-				pl.setType(((SoapObject) tableLine.getProperty(j)).getProperty("Type").toString());
-				pl.setDocument_No(((SoapObject) tableLine.getProperty(j)).getProperty("Document_No").toString());
-				pl.setUnit_of_Measure_Code(((SoapObject) tableLine.getProperty(j)).getProperty("Unit_of_Measure_Code").toString());
-				pl.setUnit_of_Measure(((SoapObject) tableLine.getProperty(j)).getProperty("Unit_of_Measure").toString());
-				PurchaseLineList.add(pl);
-				
-			}
-			purchaseorders.setKey(Key);
-			purchaseorders.setNo(No);
-			purchaseorders.setBuy_from_Vendor_Name(Buy_from_Vendor_Name);
-			purchaseorders.setBuy_from_Vendor_No(Buy_from_Vendor_No);
-			purchaseorders.setPosting_Description(Posting_Description);
-			purchaseorders.setPurchLines(PurchaseLineList);
+				if(result.hasProperty("Buy_from_Vendor_No")==true) {
+					Buy_from_Vendor_No=result.getProperty("Buy_from_Vendor_No").toString();
+					};
+				if(result.hasProperty("Buy_from_Vendor_Name")==true) {
+					Buy_from_Vendor_Name=result.getProperty("Buy_from_Vendor_Name").toString();
+					};
+				if(result.hasProperty("Status")==true) {
+					Status=result.getProperty("Status").toString();
+						};
+				if(result.hasProperty("Posting_Description")==true) {
+					Posting_Description=result.getProperty("Posting_Description").toString();
+					};
+				SoapObject tableLine=(SoapObject) result.getProperty("PurchLines");
+			
+				for(int j=0;j<tableLine.getPropertyCount();j++) {
+					PurchaseLine pl = new PurchaseLine();
+					SoapObject resTable= (SoapObject)tableLine.getProperty(j);
+					
+					pl.setKey(((SoapObject) tableLine.getProperty(j)).getProperty("Key").toString());
+					pl.setItemNo(((SoapObject) tableLine.getProperty(j)).getProperty("No").toString());
+					pl.setLine_No(((SoapObject) tableLine.getProperty(j)).getProperty("Line_No").toString());
+					pl.setType(((SoapObject) tableLine.getProperty(j)).getProperty("Type").toString());
+					pl.setDocument_No(((SoapObject) tableLine.getProperty(j)).getProperty("Document_No").toString());
+					pl.setUnit_of_Measure_Code(((SoapObject) tableLine.getProperty(j)).getProperty("Unit_of_Measure_Code").toString());
+					pl.setUnit_of_Measure(((SoapObject) tableLine.getProperty(j)).getProperty("Unit_of_Measure").toString());
+					pl.setDescription(((SoapObject) tableLine.getProperty(j)).getProperty("Description").toString());
+					pl.setQuantity(((SoapObject) tableLine.getProperty(j)).getProperty("Quantity").toString());
+					PurchaseLineList.add(pl);
+					purchaseorders.setKey(Key);
+					purchaseorders.setNo(No);
+					purchaseorders.setBuy_from_Vendor_Name(Buy_from_Vendor_Name);
+					purchaseorders.setBuy_from_Vendor_No(Buy_from_Vendor_No);
+					purchaseorders.setPosting_Description(Posting_Description);
+					purchaseorders.setStatus(Status);
+					purchaseorders.setPurchLines(PurchaseLineList);
+				}
+			 }
 		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 		return purchaseorders;
@@ -107,7 +127,8 @@ public class PurchaseOrdersService {
 					No=null,
 					Buy_from_Vendor_No=null,
 					Buy_from_Vendor_Name=null,
-					Posting_Description=null;
+					Posting_Description=null,
+		            Status=null;
 		
 		
 		//creation de l'envelope soap
@@ -137,7 +158,10 @@ public class PurchaseOrdersService {
 					Unit_of_Measure_Code=null,
 					Unit_of_Measure=null,
 					Document_No=null,
-					Line_No=null;
+					Line_No=null,
+			 		itemNo="null",
+			 	    Quantity=null;
+			 
 			 for (int i = 0; i < result.getPropertyCount(); i++) {
 				 SoapObject oneElemnetofResult = (SoapObject) result.getProperty(i);
 				 SoapObject PurchaseLinetable=(SoapObject) oneElemnetofResult.getProperty("PurchLines");
@@ -145,6 +169,9 @@ public class PurchaseOrdersService {
 				 for(int j=0;j<PurchaseLinetable.getPropertyCount();j++) {
 					 PurchaseLine pl = new PurchaseLine();
 					 SoapObject ElementOfPurchaseLinetable= (SoapObject) PurchaseLinetable.getProperty(j);
+					 if (ElementOfPurchaseLinetable.hasProperty("No")==true) {
+						 itemNo=ElementOfPurchaseLinetable.getProperty("No").toString();
+						}
 					 if (ElementOfPurchaseLinetable.hasProperty("Key")==true) {
 						 Key=ElementOfPurchaseLinetable.getProperty("Key").toString();
 						}
@@ -163,11 +190,16 @@ public class PurchaseOrdersService {
 						if (ElementOfPurchaseLinetable.hasProperty("Type")) {
 							Type=ElementOfPurchaseLinetable.getProperty("Type").toString();
 						}
+						if (ElementOfPurchaseLinetable.hasProperty("Quantity")) {
+							Quantity=ElementOfPurchaseLinetable.getProperty("Quantity").toString();
+						}
+						pl.setItemNo(itemNo);
 						pl.setKey(Key);
 						pl.setUnit_of_Measure(Unit_of_Measure);
 						pl.setUnit_of_Measure_Code(Unit_of_Measure_Code);
 						pl.setDocument_No(Document_No);
 						pl.setLine_No(Line_No);
+						pl.setQuantity(Quantity);
 						pl.setType(Type);
 						TableOfPurchaseLinePerElement.add(pl);
 				 }
@@ -188,7 +220,10 @@ public class PurchaseOrdersService {
 					if(oneElemnetofResult.hasProperty("Posting_Description")==true) {
 						Posting_Description=oneElemnetofResult.getProperty("Posting_Description").toString();
 					};
-					PurchaseOrders purchaseOrder = new PurchaseOrders(key_Orders,No,Buy_from_Vendor_No,Buy_from_Vendor_Name,Posting_Description,TableOfPurchaseLinePerElement);
+					if(oneElemnetofResult.hasProperty("Status")==true) {
+						Status=oneElemnetofResult.getProperty("Status").toString();
+					};
+					PurchaseOrders purchaseOrder = new PurchaseOrders(key_Orders,No,Buy_from_Vendor_No,Buy_from_Vendor_Name,Posting_Description,Status,TableOfPurchaseLinePerElement);
 					PurchaseOrdersList.add(purchaseOrder);
 			 }
 			
@@ -236,5 +271,39 @@ public class PurchaseOrdersService {
 		}
 		
 	
+	}
+	
+	public void updateStatus(String idPurchaseOrder,String status) {
+		SoapObject result;
+		
+		Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/PurchaseHeaders");
+		
+		//creation de l'envelope soap
+		SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		soapEnvelope.dotNet = true;
+		soapEnvelope.avoidExceptionForUnknownProperty = true;
+		soapEnvelope.setAddAdornments(false);
+		
+		//initialisation de la requette soap                 Targetnamesapce                    operation name
+		SoapObject soapRequest = new SoapObject("urn:microsoft-dynamics-schemas/codeunit/PurchaseHeaders", "UpdateOne");
+		soapRequest.addProperty("no",idPurchaseOrder);
+		soapRequest.addProperty("status",status);
+		soapEnvelope.setOutputSoapObject(soapRequest);
+		
+		
+		//configuration de l'Ntlm et du protocole http
+		NtlmTransport httpTransport = new NtlmTransport(config.url);
+		httpTransport.setCredentials(config.login,config.pwd, config.domaine, config.worksattion);
+	    httpTransport.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		httpTransport.debug = true;
+		try {
+			 httpTransport.call("urn:microsoft-dynamics-schemas/codeunit/PurchaseHeaders:UpdateOne", soapEnvelope);
+				// result = (SoapObject) soapEnvelope.getResponse();
+				System.out.println("the Commande with the following Number "+idPurchaseOrder+" has been updated successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		
 	}
 }

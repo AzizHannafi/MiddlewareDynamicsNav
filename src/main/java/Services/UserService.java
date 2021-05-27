@@ -11,7 +11,7 @@ import Entity.User;
 import Ntlm.NtlmTransport;
 
 public class UserService {
-	Config config = new Config("http://192.168.1.10:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Users");
+	Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Users");
 	
 	public User authentificate(User userparam) {
 	

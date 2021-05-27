@@ -7,7 +7,8 @@ public class PurchaseOrders {
 		   No,
 		   Buy_from_Vendor_No,
 		   Buy_from_Vendor_Name,
-		   Posting_Description;
+		   Posting_Description,
+	       Status;
 	public String getKey() {
 		return Key;
 	}
@@ -24,6 +25,19 @@ public class PurchaseOrders {
 	}
 
 	
+	public PurchaseOrders(String key, String no, String buy_from_Vendor_No, String buy_from_Vendor_Name,
+			String posting_Description, String status, List<PurchaseLine> purchLines) {
+		super();
+		Key = key;
+		No = no;
+		Buy_from_Vendor_No = buy_from_Vendor_No;
+		Buy_from_Vendor_Name = buy_from_Vendor_Name;
+		Posting_Description = posting_Description;
+		Status = status;
+		PurchLines = purchLines;
+	}
+
+
 	public PurchaseOrders(String key, String no, String buy_from_Vendor_No, String buy_from_Vendor_Name,
 			String posting_Description, List<PurchaseLine> purchLines) {
 		super();
@@ -84,6 +98,16 @@ public class PurchaseOrders {
 
 	public void setPurchLines(List<PurchaseLine> purchLines) {
 		PurchLines = purchLines;
+	}
+
+
+	public String getStatus() {
+		return Status;
+	}
+
+
+	public void setStatus(String status) {
+		Status = status;
 	}
 	
 	
