@@ -1,16 +1,37 @@
 package Entity;
 
 public class SalesLine {
-	String  Type,Key,
-			No,Document_No,
-			Line_No,Quantity,
+	String  Type,
+			Key,
+			No,
+			Document_No,
+			Line_No,
+			Quantity,
 			Unit_of_Measure_Code,
 			Unit_of_Measure,
 			Quantity_Shipped,
+			Description,
 			Qty_to_Invoice;
 
 	public SalesLine() {
 		super();
+	}
+
+	public SalesLine(String type, String key, String no, String document_No, String line_No, String quantity,
+			String unit_of_Measure_Code, String unit_of_Measure, String quantity_Shipped, String description,
+			String qty_to_Invoice) {
+		super();
+		Type = type;
+		Key = key;
+		No = no;
+		Document_No = document_No;
+		Line_No = line_No;
+		Quantity = quantity;
+		Unit_of_Measure_Code = unit_of_Measure_Code;
+		Unit_of_Measure = unit_of_Measure;
+		Quantity_Shipped = quantity_Shipped;
+		Description = description;
+		Qty_to_Invoice = qty_to_Invoice;
 	}
 
 	public SalesLine(String type, String key, String no, String document_No, String line_No, String quantity,
@@ -108,6 +129,15 @@ public class SalesLine {
 	public void setKey(String key) {
 		Key = key;
 	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+	
 	
 	
 }

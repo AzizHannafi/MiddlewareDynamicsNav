@@ -17,7 +17,7 @@ public class PurchaseOrdersService {
 
 	ArrayList<PurchaseLine> PurchaseLineList = new ArrayList<PurchaseLine>();
 	PurchaseOrders purchaseorders= new PurchaseOrders();
-	Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurchaseOrders");
+	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurchaseOrders");
 	
 	
 	public PurchaseOrders getOnePurchaseOrder(String idPurchaseOrder) {
@@ -276,7 +276,7 @@ public class PurchaseOrdersService {
 	public void updateStatus(String idPurchaseOrder,String status) {
 		SoapObject result;
 		
-		Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/PurchaseHeaders");
+		Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/PurchaseHeaders");
 		
 		//creation de l'envelope soap
 		SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

@@ -11,9 +11,9 @@ import Entity.Rejet;
 import Ntlm.NtlmTransport;
 
 public class RejetService {
-	Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Rejet");
+	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Rejet");
 	
-	public void addToReject(String IDCommande,String IDItem) {
+	public void addToReject(String IDCommande,String IDItem,String IDUser) {
 
 		//creation de l'envelope soap
 				SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -28,6 +28,7 @@ public class RejetService {
 				////Ajout des parametre a la requette soap
 		      	soapRequest.addProperty("iDCommande", IDCommande);
 		      	soapRequest.addProperty("iDItem", IDItem);
+		      	soapRequest.addProperty("iDuser", IDUser);
 		      
 				
 				soapEnvelope.setOutputSoapObject(soapRequest);

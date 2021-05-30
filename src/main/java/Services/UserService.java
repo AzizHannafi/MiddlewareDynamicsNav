@@ -11,7 +11,7 @@ import Entity.User;
 import Ntlm.NtlmTransport;
 
 public class UserService {
-	Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Users");
+	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Users");
 	
 	public User authentificate(User userparam) {
 	
@@ -67,6 +67,7 @@ public class UserService {
 				 User.setUsername(infoUser.getProperty("Username").toString());
 				 User.setPassword(infoUser.getProperty("Password").toString());
 				 User.setLocationCode(infoUser.getProperty("LocationCode").toString());
+				 User.setPostUser(infoUser.getProperty("Post").toString());
 				System.out.println("Welcome "+infoUser.getProperty("Username").toString()); 
 			 }else {
 				 System.out.println("Password or Username is incorrect"); 
@@ -75,6 +76,7 @@ public class UserService {
 				 User.setUsername("null");
 				 User.setPassword("null");
 				 User.setLocationCode("null");
+				 User.setPostUser("null");
 			 }
 			
 		} catch (Exception e) {
@@ -137,6 +139,7 @@ public class UserService {
 					 User.setUsername(infoUser.getProperty("Username").toString());
 					 User.setPassword(infoUser.getProperty("Password").toString());
 					 User.setLocationCode(infoUser.getProperty("LocationCode").toString());
+					 User.setPostUser(infoUser.getProperty("Post").toString());
 					 System.out.println("this user is  "+infoUser.getProperty("Username").toString()); 
 				 }else {
 					 System.out.println("ID user is incorrect"); 
@@ -145,6 +148,7 @@ public class UserService {
 					 User.setUsername("null");
 					 User.setPassword("null");
 					 User.setLocationCode("null");
+					 User.setPostUser("null");
 				 }
 		} catch (Exception e) {
 			System.out.println("Error in fetching data");

@@ -13,7 +13,7 @@ import Entity.PurchaseLine;
 import Ntlm.NtlmTransport;
 
 public class PurchaseLineService {
-	Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurechaseLine");
+	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurechaseLine");
 	ArrayList<PurchaseLine> PurchaseLineList = new ArrayList<PurchaseLine>();
 	
 	
@@ -91,13 +91,25 @@ public class PurchaseLineService {
 			result = (SoapObject) soapEnvelope.getResponse();
 			
 			for(int i =0;i<result.getPropertyCount();i++) {
-				String  Key=null,
-						Type=null,
-						Unit_of_Measure_Code=null,
-						Unit_of_Measure=null,
-						Document_No=null,
-						Line_No=null;
+				String  Key="null",
+						Type="null",
+						itemNo= "null",
+						Unit_of_Measure_Code="null",
+						Unit_of_Measure="null",
+						Document_No="null",
+						Description="null",
+						Quantity="null",
+						Line_No="null";
 				SoapObject onePurchaseLine= (SoapObject) result.getProperty(i);
+				if(onePurchaseLine.hasProperty("No")==true) {
+					itemNo=onePurchaseLine.getProperty("No").toString();
+				}
+				if(onePurchaseLine.hasProperty("Description")==true) {
+					Description=onePurchaseLine.getProperty("Description").toString();
+				}
+				if(onePurchaseLine.hasProperty("Quantity")==true) {
+					Quantity=onePurchaseLine.getProperty("Quantity").toString();
+				}
 				if(onePurchaseLine.hasProperty("Key")==true) {
 					Key=onePurchaseLine.getProperty("Key").toString();
 				}
@@ -117,8 +129,11 @@ public class PurchaseLineService {
 					Line_No=onePurchaseLine.getProperty("Line_No").toString();
 				}
 				PurchaseLine pl = new PurchaseLine();
+				pl.setQuantity(Quantity);
 				pl.setKey(Key);
 				pl.setDocument_No(Document_No);
+				pl.setItemNo(itemNo);
+				pl.setDescription(Description);
 				pl.setLine_No(Line_No);
 				pl.setType(Type);
 				pl.setUnit_of_Measure(Unit_of_Measure);
@@ -164,4 +179,19 @@ public class PurchaseLineService {
 			e.printStackTrace();
 		}
 	}
+	/*public Item GetPurchaseItem(String ItemNo) {
+		Item item= new Item();
+		item.setNo("null");
+		float quantite=0;
+		List<PurchaseLine>  listPurchaseLine=  GetAllPurchaseLine();
+		for(int i=0;i<listPurchaseLine.size();i++) {
+			if(listPurchaseLine.get(i).getItemNo().toString().equals(ItemNo)) {
+				item.setNo(ItemNo);
+				item.setBase_Unit_of_Measure(listPurchaseLine.get(i).getUnit_of_Measure().toString());
+				item.setDescription(listPurchaseLine.get(i).getDescription().toString());
+				quantite+=Float.parseFloat(listPurchaseLine.get(i).getQuantity().toString());
+			}
+		}
+		return item;
+	}*/
 }

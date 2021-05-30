@@ -6,12 +6,27 @@ public class User {
 		private String Lastname;
 		private String Password;
 		private String LocationCode;
+		private String postUser;
 		
 		public User() {
 			super();
 		}
 
 	
+		
+		public User(String id, String username, String lastname, String password, String locationCode,
+				String postUser) {
+			super();
+			this.id = id;
+			Username = username;
+			Lastname = lastname;
+			Password = password;
+			LocationCode = locationCode;
+			this.postUser = postUser;
+		}
+
+
+
 		public User(String username, String lastname, String password, String locationCode) {
 			super();
 			Username = username;
@@ -78,6 +93,18 @@ public class User {
 
 		public void setLocationCode(String locationCode) {
 			LocationCode = locationCode;
+		}
+
+
+
+		public String getPostUser() {
+			return postUser;
+		}
+
+
+
+		public void setPostUser(String postUser) {
+			this.postUser = postUser;
 		}
 		
 		

@@ -14,7 +14,7 @@ import Ntlm.NtlmTransport;
 
 public class SalesLineService {
 
-	Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Page/SalesOrderLine");
+	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/SalesOrderLine");
 	ArrayList<SalesLine> SalesLineList = new ArrayList<SalesLine>();
 	
 	public SalesLine getOneSalesLine(String idSaleOrder,String LineNo) {
@@ -98,20 +98,25 @@ public class SalesLineService {
 			result = (SoapObject) soapEnvelope.getResponse();
 			
 			for(int i =0;i<result.getPropertyCount();i++) {
-				String Key=null;
-				String NoLine=null;
-				String TypeLine=null;
-				String Document_NoLine=null;
-				String QuantityLine=null;
-				String LineNoLine=null;
-				String Unit_of_Measure_CodeLine=null;
-				String Unit_of_MeasureLine=null;
-				String Quantity_ShippedLine=null;
-				String Qty_to_InvoiceLine=null;
+				String No="null";
+				String Description="null";
+				String Key="null";
+				String NoLine="null";
+				String TypeLine="null";
+				String Document_NoLine="null";
+				String QuantityLine="null";
+				String LineNoLine="null";
+				String Unit_of_Measure_CodeLine="null";
+				String Unit_of_MeasureLine="null";
+				String Quantity_ShippedLine="null";
+				String Qty_to_InvoiceLine="null";
 				SoapObject oneSaleLine= (SoapObject) result.getProperty(i);
 				
 				if(oneSaleLine.hasProperty("Key")==true) {
 					Key=oneSaleLine.getProperty("Key").toString();
+				}
+				if(oneSaleLine.hasProperty("Description")==true) {
+					Description=oneSaleLine.getProperty("Description").toString();
 				}
 				if(oneSaleLine.hasProperty("No")==true) {
 					NoLine=oneSaleLine.getProperty("No").toString();
@@ -141,6 +146,8 @@ public class SalesLineService {
 					Qty_to_InvoiceLine=oneSaleLine.getProperty("Qty_to_Invoice").toString();
 				}
 				SalesLine sl = new SalesLine();
+				sl.setDescription(Description);
+				sl.setNo(No);
 				sl.setKey(Key);
 				sl.setNo(NoLine);
 				sl.setType(TypeLine);

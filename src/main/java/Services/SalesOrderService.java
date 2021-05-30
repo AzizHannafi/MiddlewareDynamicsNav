@@ -20,7 +20,7 @@ public class SalesOrderService {
 		
 		ArrayList<SalesLine> SalesLineList = new ArrayList<SalesLine>();
 	
-		Config config = new Config("http://192.168.1.7:7047/BC130/WS/CRONUS%20France%20S.A./Page/SalesHeader");
+		Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/SalesHeader");
 		
 		
 		

@@ -17,9 +17,9 @@ public class RejetController {
 	RejetService RejetService= new RejetService();
 	
 	
-	@RequestMapping(value = "/add/{idCommande}/{IDItem}",method = RequestMethod.POST)
-	public void addToReject(@PathVariable("idCommande") String idCommande,@PathVariable("IDItem") String IDItem) {
-		 RejetService.addToReject(idCommande,IDItem);
+	@RequestMapping(value = "/add/{idCommande}/{IDItem}/{IDUser}",method = RequestMethod.POST)
+	public void addToReject(@PathVariable("idCommande") String idCommande,@PathVariable("IDItem") String IDItem,@PathVariable("IDUser") String IDUser) {
+		 RejetService.addToReject(idCommande,IDItem,IDUser);
 	}
 	
 	@RequestMapping(value = "/GetOne",method = RequestMethod.POST)

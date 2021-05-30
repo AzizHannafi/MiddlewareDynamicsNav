@@ -27,4 +27,29 @@ public class ItemController {
 	public List<Item> getAllItems() {
 		return itemService.getAllItems();
 	}
+	
+	@RequestMapping(value = "/GetAllWithShelf",method = RequestMethod.GET)
+	public List<Item> GetAllWithShelf() {
+		return itemService.getAllItemsWithShelf();
+	}
+	
+	@RequestMapping(value = "/updateEmplacement/{idItem}/{idEmplacement}",method = RequestMethod.PUT)
+	public void updateEmplacement(@PathVariable("idItem")String idItem, @PathVariable("idEmplacement")String idEmplacement) {
+		 itemService.updateEmplacement(idItem,idEmplacement);
+	}
+	@RequestMapping(value = "/GetOneWithShelf/{idItem}",method = RequestMethod.POST)
+	public Item GetOneWithShelf(@PathVariable("idItem") String idItem) {
+		return itemService.GetOneItemWithShelf(idItem);
+	}
+	
+	@RequestMapping(value = "/GetBilanPurchaseOneItem/{idItem}",method = RequestMethod.GET)
+	public Item GetBilanOneItem(@PathVariable("idItem") String idItem) {
+		return itemService.GetPurchaseItem(idItem);
+	}
+	
+	@RequestMapping(value = "/GetBilanSalesOneItem/{idItem}",method = RequestMethod.GET)
+	public Item GetBilanSalesOneItem(@PathVariable("idItem") String idItem) {
+		return itemService.GetSalesItem(idItem);
+	}
+	
 }
