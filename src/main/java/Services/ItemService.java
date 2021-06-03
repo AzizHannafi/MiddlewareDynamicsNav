@@ -15,7 +15,7 @@ import Ntlm.NtlmTransport;
 
 public class ItemService {
 
-	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/ListItem");
+	Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Page/ListItem");
 	List<Item> listItem = new ArrayList<Item>();
 	public Item getOneItem(String idItem) {
 		Item item = new Item();
@@ -93,11 +93,11 @@ public class ItemService {
 			httpTransport.call("urn:microsoft-dynamics-schemas/page/listitem:ReadMultiple", soapEnvelope);
 			 //recuperation de la reponce 
 			result = (SoapObject) soapEnvelope.getResponse();
-			String 	Key=null,
-					Base_Unit_of_Measure=null,
-					Description=null,
-					Inventory=null,
-					No=null;
+			String 	Key="null",
+					Base_Unit_of_Measure="null",
+					Description="null",
+					Inventory="null",
+					No="null";
 			for(int i=0; i<result.getPropertyCount();i++) {
 				Item item =new Item();
 				SoapObject oneElement= (SoapObject)result.getProperty(i);
@@ -234,7 +234,7 @@ public class ItemService {
 		
 		
 		//SoapObject result =new SoapObject();
-		Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/ItemInfo");
+		Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Codeunit/ItemInfo");
 		
 		
 		SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);

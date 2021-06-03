@@ -11,7 +11,7 @@ import Entity.Rejet;
 import Ntlm.NtlmTransport;
 
 public class RejetService {
-	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Rejet");
+	Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Codeunit/Rejet");
 	
 	public void addToReject(String IDCommande,String IDItem,String IDUser) {
 

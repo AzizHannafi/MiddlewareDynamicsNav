@@ -3,10 +3,20 @@ package Entity;
 public class Rejet {
 	String idCommande;
 	String IDItem;
+	String IDUser;
 
 	public Rejet() {
 		super();
 	}
+
+	
+	public Rejet(String idCommande, String iDItem, String iDUser) {
+		super();
+		this.idCommande = idCommande;
+		IDItem = iDItem;
+		IDUser = iDUser;
+	}
+
 
 	public Rejet(String idCommande,String IDItem) {
 		super();
@@ -28,6 +38,16 @@ public class Rejet {
 
 	public void setIDItem(String iDItem) {
 		IDItem = iDItem;
+	}
+
+
+	public String getIDUser() {
+		return IDUser;
+	}
+
+
+	public void setIDUser(String iDUser) {
+		IDUser = iDUser;
 	}
 	
 	

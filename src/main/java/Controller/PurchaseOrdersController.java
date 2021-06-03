@@ -26,6 +26,11 @@ public class PurchaseOrdersController {
 		return purchaseordersservice.getOnePurchaseOrder(idPurchaseOrder);
 	}
 	
+	@RequestMapping(value = "/GetAll/{locationCode}",method = RequestMethod.GET)
+	public List<PurchaseOrders> getAllOrder(@PathVariable("locationCode") String locationCode) {
+		return purchaseordersservice.getAllPurchaseOrder(locationCode);
+	}
+	
 	@RequestMapping(value = "/GetAll",method = RequestMethod.GET)
 	public List<PurchaseOrders> getAllOrder() {
 		return purchaseordersservice.getAllPurchaseOrder();

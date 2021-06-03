@@ -26,19 +26,19 @@ public class SalesOrderController {
 	}
 	
 		
-	@RequestMapping(value = "/GetAll",method = RequestMethod.GET)
-	public List<SalesOrder> getAllOrders() {
-		return salesOrderService.GetAllSalesOrder();
+	@RequestMapping(value = "/GetAll/{locationCode}",method = RequestMethod.GET)
+	public List<SalesOrder> getAllOrders(@PathVariable("locationCode") String locationCode) {
+		return salesOrderService.GetAllSalesOrder(locationCode);
 	}
 	
-	@RequestMapping(value = "/GetAllReleasedOrder",method = RequestMethod.GET)
-	public List<SalesOrder> GetAllReleasedOrder() {
-		return salesOrderService.GetAllReleasedSalesOrder();
+	@RequestMapping(value = "/GetAllReleasedOrder/{locationCode}",method = RequestMethod.GET)
+	public List<SalesOrder> GetAllReleasedOrder(@PathVariable("locationCode") String locationCode) {
+		return salesOrderService.GetAllReleasedSalesOrder(locationCode);
 	}
 	
-	@RequestMapping(value = "/GetAllOpenOrder",method = RequestMethod.GET)
-	public List<SalesOrder> GetAllOpenOrder() {
-		return salesOrderService.GetAllOpenSalesOrder();
+	@RequestMapping(value = "/GetAllOpenOrder/{locationCode}",method = RequestMethod.GET)
+	public List<SalesOrder> GetAllOpenOrder(@PathVariable("locationCode") String locationCode) {
+		return salesOrderService.GetAllOpenSalesOrder(locationCode);
 	}
 	
 	@RequestMapping(value = "/DeleteSalesOrder",method = RequestMethod.DELETE)

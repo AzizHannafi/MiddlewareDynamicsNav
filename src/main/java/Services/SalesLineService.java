@@ -14,7 +14,7 @@ import Ntlm.NtlmTransport;
 
 public class SalesLineService {
 
-	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/SalesOrderLine");
+	Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Page/SalesOrderLine");
 	ArrayList<SalesLine> SalesLineList = new ArrayList<SalesLine>();
 	
 	public SalesLine getOneSalesLine(String idSaleOrder,String LineNo) {

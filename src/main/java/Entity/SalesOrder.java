@@ -15,7 +15,8 @@ public class SalesOrder {
 					Due_Date,
 					Prepayment_Due_Date,
 					Prepmt_Pmt_Discount_Date,
-					Location_Code;
+					Location_Code,
+					Status;
 					List<SalesLine> salesLine;
 				/*	No_of_Archived_Versions,
 				 * Sell_to_Post_Code,
@@ -83,6 +84,42 @@ public class SalesOrder {
 	}
 	
 	
+
+	public SalesOrder(String key, String no, String sell_to_Customer_No, String sell_to_Customer_Name,
+						String posting_Description, String sell_to_Address, String sell_to_City, String sell_to_County,
+						String order_Date, String due_Date, String prepayment_Due_Date, String prepmt_Pmt_Discount_Date,
+						String location_Code, String status, List<SalesLine> salesLine) {
+					super();
+					Key = key;
+					No = no;
+					Sell_to_Customer_No = sell_to_Customer_No;
+					Sell_to_Customer_Name = sell_to_Customer_Name;
+					Posting_Description = posting_Description;
+					Sell_to_Address = sell_to_Address;
+					Sell_to_City = sell_to_City;
+					Sell_to_County = sell_to_County;
+					Order_Date = order_Date;
+					Due_Date = due_Date;
+					Prepayment_Due_Date = prepayment_Due_Date;
+					Prepmt_Pmt_Discount_Date = prepmt_Pmt_Discount_Date;
+					Location_Code = location_Code;
+					Status = status;
+					this.salesLine = salesLine;
+				}
+
+
+
+	public String getStatus() {
+		return Status;
+	}
+
+
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+
+
 
 	public SalesOrder(String key, String no, String sell_to_Customer_No, String sell_to_Customer_Name,
 						String posting_Description, String sell_to_Address, String sell_to_City, String sell_to_County,

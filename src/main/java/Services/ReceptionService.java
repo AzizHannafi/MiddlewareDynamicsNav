@@ -8,7 +8,7 @@ import Configuration.Config;
 import Ntlm.NtlmTransport;
 
 public class ReceptionService {
-Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Codeunit/Reception");
+Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Codeunit/Reception");
 	
 	public void addToReception(String IDCommande,String IDItem,String IDUser) {
 

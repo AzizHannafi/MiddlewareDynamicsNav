@@ -13,7 +13,7 @@ import Entity.PurchaseLine;
 import Ntlm.NtlmTransport;
 
 public class PurchaseLineService {
-	Config config = new Config("http://192.168.1.9:7047/BC130/WS/CRONUS%20France%20S.A./Page/PurechaseLine");
+	Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Page/PurechaseLine");
 	ArrayList<PurchaseLine> PurchaseLineList = new ArrayList<PurchaseLine>();
 	
 	
@@ -179,19 +179,5 @@ public class PurchaseLineService {
 			e.printStackTrace();
 		}
 	}
-	/*public Item GetPurchaseItem(String ItemNo) {
-		Item item= new Item();
-		item.setNo("null");
-		float quantite=0;
-		List<PurchaseLine>  listPurchaseLine=  GetAllPurchaseLine();
-		for(int i=0;i<listPurchaseLine.size();i++) {
-			if(listPurchaseLine.get(i).getItemNo().toString().equals(ItemNo)) {
-				item.setNo(ItemNo);
-				item.setBase_Unit_of_Measure(listPurchaseLine.get(i).getUnit_of_Measure().toString());
-				item.setDescription(listPurchaseLine.get(i).getDescription().toString());
-				quantite+=Float.parseFloat(listPurchaseLine.get(i).getQuantity().toString());
-			}
-		}
-		return item;
-	}*/
+
 }
