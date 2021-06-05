@@ -249,6 +249,55 @@ public class PurchaseOrdersService {
 		return PurchaseOrdersList;
 	}
 	
+	public List<PurchaseOrders> GetAllReleasedPurchaseOrders(){
+		
+		List<PurchaseOrders> listOrder= getAllPurchaseOrder();
+		List<PurchaseOrders> listReleasedOrder = new ArrayList<PurchaseOrders>();
+		listReleasedOrder.clear();
+		for(int i=0;i<listOrder.size();i++) {
+			if(listOrder.get(i).getStatus().equals("Released")) {
+				listReleasedOrder.add(listOrder.get(i));
+			}
+		}
+		
+		return listReleasedOrder;
+	}
+	
+public List<PurchaseOrders> GetAllOpenPurchaseOrders(){
+		
+		List<PurchaseOrders> listOrder= getAllPurchaseOrder();
+		List<PurchaseOrders> listReleasedOrder = new ArrayList<PurchaseOrders>();
+		listReleasedOrder.clear();
+		for(int i=0;i<listOrder.size();i++) {
+			if(listOrder.get(i).getStatus().equals("Open")) {
+				listReleasedOrder.add(listOrder.get(i));
+			}
+		}
+		
+		return listReleasedOrder;
+	}
+		
+		public List<PurchaseOrders> getOneReleasedPurchaseOrder(String idOrder) {
+			List<PurchaseOrders> lsOrder= new ArrayList<PurchaseOrders>();
+			List<PurchaseOrders> lsReleased= GetAllReleasedPurchaseOrders();
+			for(int i=0;i<lsReleased.size();i++) {
+				if(lsReleased.get(i).getNo().equals(idOrder)) {
+					lsOrder.add(lsReleased.get(i));
+				}
+			}
+		return lsOrder;
+		}
+		public List<PurchaseOrders> getOneOpenPurchaseOrder(String idOrder) {
+			List<PurchaseOrders> lsOrder= new ArrayList<PurchaseOrders>();
+			List<PurchaseOrders> lsOpen= GetAllOpenPurchaseOrders();
+			for(int i=0;i<lsOpen.size();i++) {
+				if(lsOpen.get(i).getNo().equals(idOrder)) {
+					lsOrder.add(lsOpen.get(i));
+				}
+			}
+		return lsOrder;
+		}
+	
 	public List<PurchaseOrders> getAllPurchaseOrder() {
 		ArrayList<PurchaseOrders> PurchaseOrdersList = new ArrayList<PurchaseOrders>();
 		//System.out.println("get all  methode");

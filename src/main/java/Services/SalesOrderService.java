@@ -361,24 +361,25 @@ public class SalesOrderService {
 		}
 		
 		
-/*		public List<SalesOrder> GetAllSalesOrder(){
+		public List<SalesOrder> GetAllSalesOrder(){
 				SoapObject result;
 				
 				ArrayList<SalesOrder> SalesOrderList = new ArrayList<SalesOrder>();
 				ArrayList<SalesLine> SalesLineListGetAll = new ArrayList<SalesLine>();
-				String 	key_Order=null,
-						No=null,
-						Sell_to_Customer_No=null,
-						Sell_to_Customer_Name=null,
-						Posting_Description=null,
-						Sell_to_Address=null,
-						Sell_to_City=null,
-						Sell_to_County=null,
-						Order_Date=null,
-						Due_Date=null,
-						Prepayment_Due_Date=null,
-						Prepmt_Pmt_Discount_Date=null,
-						Location_Code=null;
+				String 	key_Order="null",
+						No="null",
+						Sell_to_Customer_No="null",
+						Sell_to_Customer_Name="null",
+						Posting_Description="null",
+						Sell_to_Address="null",
+						Sell_to_City="null",
+						Sell_to_County="null",
+						Order_Date="null",
+						Due_Date="null",
+						Prepayment_Due_Date="null",
+						Prepmt_Pmt_Discount_Date="null",
+						Location_Code="null",
+						Status="null";
 				
 				
 				//creation de l'envelope soap
@@ -484,6 +485,9 @@ public class SalesOrderService {
 						if(oneElemnetofResult.hasProperty("Location_Code")==true) {
 							Location_Code=oneElemnetofResult.getProperty("Location_Code").toString();
 						};
+						if(oneElemnetofResult.hasProperty("Status")==true) {
+							Status=oneElemnetofResult.getProperty("Status").toString();
+						};
 						SalesOrder salesOrder =new SalesOrder(
 								key_Order,
 								No,
@@ -496,7 +500,7 @@ public class SalesOrderService {
 								Order_Date,
 								Due_Date,
 								Prepmt_Pmt_Discount_Date,
-								Location_Code, Location_Code,
+								Location_Code, Location_Code,Status,
 								TableOfSaleLinePerElement);
 					
 						SalesOrderList.add(salesOrder);						
@@ -514,7 +518,35 @@ public class SalesOrderService {
 					e.printStackTrace();
 				}
 				return SalesOrderList;
-			}*/
+			}
+		
+		public List<SalesOrder> GetAllOpenSalesOrder(){
+			
+			List<SalesOrder> listOrder= GetAllSalesOrder();
+			List<SalesOrder> listOpenOrder = new ArrayList<SalesOrder>();
+			listOpenOrder.clear();
+			for(int i=0;i<listOrder.size();i++) {
+				if(listOrder.get(i).getStatus().equals("Open")) {
+					listOpenOrder.add(listOrder.get(i));
+				}
+			}
+			
+			return listOpenOrder;
+		}
+		
+public List<SalesOrder> GetAllReleasedSalesOrder(){
+			
+			List<SalesOrder> listOrder= GetAllSalesOrder();
+			List<SalesOrder> listReleasedOrder = new ArrayList<SalesOrder>();
+			listReleasedOrder.clear();
+			for(int i=0;i<listOrder.size();i++) {
+				if(listOrder.get(i).getStatus().equals("Released")) {
+					listReleasedOrder.add(listOrder.get(i));
+				}
+			}
+			
+			return listReleasedOrder;
+		}
 		
 		public List<SalesOrder> GetAllReleasedSalesOrder(String locationCode){
 			SoapObject result;
@@ -845,6 +877,65 @@ public class SalesOrderService {
 				e.printStackTrace();
 			}
 			return SalesOrderList;
+		}
+
+		public void updateStatus(String idOrder,String status) {
+			SoapObject result;
+			
+			Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Codeunit/CmdVente");
+			
+			//creation de l'envelope soap
+			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			soapEnvelope.dotNet = true;
+			soapEnvelope.avoidExceptionForUnknownProperty = true;
+			soapEnvelope.setAddAdornments(false);
+			
+			//initialisation de la requette soap                 Targetnamesapce                    operation name
+			SoapObject soapRequest = new SoapObject("urn:microsoft-dynamics-schemas/codeunit/CmdVente", "UpdateStatus");
+			soapRequest.addProperty("no",idOrder);
+			soapRequest.addProperty("status",status);
+			soapEnvelope.setOutputSoapObject(soapRequest);
+			
+			
+			//configuration de l'Ntlm et du protocole http
+			NtlmTransport httpTransport = new NtlmTransport(config.url);
+			httpTransport.setCredentials(config.login,config.pwd, config.domaine, config.worksattion);
+		    httpTransport.setXmlVersionTag("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			httpTransport.debug = true;
+			try {
+				 httpTransport.call("urn:microsoft-dynamics-schemas/codeunit/CmdVente:UpdateStatus", soapEnvelope);
+					// result = (SoapObject) soapEnvelope.getResponse();
+					System.out.println("the Commande with the following Number "+idOrder+" has been updated successfully");
+			} catch (Exception e) {
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+			
+		}
+		
+		public List<SalesOrder> getOneReleasedSalesOrder(String idOrder) {
+			List<SalesOrder> Lsorder= new ArrayList<SalesOrder>();
+			List<SalesOrder> lsReleased= GetAllReleasedSalesOrder();
+			
+			for(int i=0;i<lsReleased.size();i++) {
+				if(lsReleased.get(i).getNo().equals(idOrder)) {
+					Lsorder.clear();
+					Lsorder.add(lsReleased.get(i));
+				}
+			}
+		return Lsorder;
+		}
+		
+		
+		public List<SalesOrder> getOneOpenSalesOrder(String idOrder) {
+			List<SalesOrder> Lsorder= new ArrayList<SalesOrder>();
+			List<SalesOrder> lsOpen= GetAllOpenSalesOrder();
+			for(int i=0;i<lsOpen.size();i++) {
+				if(lsOpen.get(i).getNo().equals(idOrder)) {
+					Lsorder.add(lsOpen.get(i));
+				}
+			}
+		return Lsorder;
 		}
 
 		public void deleteSalesOrder(Key key) {

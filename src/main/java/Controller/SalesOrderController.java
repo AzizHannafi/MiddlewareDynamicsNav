@@ -41,9 +41,34 @@ public class SalesOrderController {
 		return salesOrderService.GetAllOpenSalesOrder(locationCode);
 	}
 	
+	@RequestMapping(value = "/GetAllOpenOrder",method = RequestMethod.GET)
+	public List<SalesOrder> GetAllOpenOrder() {
+		return salesOrderService.GetAllOpenSalesOrder();
+	}
+	
+	@RequestMapping(value = "/GetAllReleasedOrder",method = RequestMethod.GET)
+	public List<SalesOrder> GetAllReleasedOrder() {
+		return salesOrderService.GetAllReleasedSalesOrder();
+	}
+	
 	@RequestMapping(value = "/DeleteSalesOrder",method = RequestMethod.DELETE)
 	public void DeleteSalesOrder(@RequestBody Key key) {
 		salesOrderService.deleteSalesOrder(key);
+	}
+	
+	@RequestMapping(value = "/UpdateStatus/{idPurchaseOrder}/{status}",method = RequestMethod.PUT)
+	public void UpdateStatus(@PathVariable("idPurchaseOrder") String idPurchaseOrder,@PathVariable("status") String status) {
+		salesOrderService.updateStatus(idPurchaseOrder,status);
+	}
+	
+	@RequestMapping(value = "/GetOneReleased/{idSaleOrder}",method = RequestMethod.GET)
+	public List<SalesOrder> getOneReleasedSalesOrder(@PathVariable("idSaleOrder") String idSaleOrder) {
+		return salesOrderService.getOneReleasedSalesOrder(idSaleOrder);
+	}
+	
+	@RequestMapping(value = "/GetOneOpen/{idSaleOrder}",method = RequestMethod.GET)
+	public List<SalesOrder> getOneOpenSalesOrder(@PathVariable("idSaleOrder") String idSaleOrder) {
+		return salesOrderService.getOneOpenSalesOrder(idSaleOrder);
 	}
 	
 	

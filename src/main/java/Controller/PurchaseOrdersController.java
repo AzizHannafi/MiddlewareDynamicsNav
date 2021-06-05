@@ -36,6 +36,16 @@ public class PurchaseOrdersController {
 		return purchaseordersservice.getAllPurchaseOrder();
 	}
 	
+	@RequestMapping(value = "/GetAllOpenPurchaseOrders",method = RequestMethod.GET)
+	public List<PurchaseOrders> GetAllOpenPurchaseOrders() {
+		return purchaseordersservice.GetAllOpenPurchaseOrders();
+	}
+	
+	@RequestMapping(value = "/GetAllReleasedPurchaseOrders",method = RequestMethod.GET)
+	public List<PurchaseOrders> GetAllReleasedPurchaseOrders() {
+		return purchaseordersservice.GetAllReleasedPurchaseOrders();
+	}
+	
 	@RequestMapping(value = "/DeletePurchaseOrders",method = RequestMethod.DELETE)
 	public void DeletePurchaseOrders(@RequestBody Key key) {
 		purchaseordersservice.deletePurchaseOrders(key);
@@ -44,5 +54,15 @@ public class PurchaseOrdersController {
 	@RequestMapping(value = "/UpdateStatus/{idPurchaseOrder}/{status}",method = RequestMethod.PUT)
 	public void UpdateStatus(@PathVariable("idPurchaseOrder") String idPurchaseOrder,@PathVariable("status") String status) {
 		purchaseordersservice.updateStatus(idPurchaseOrder,status);
+	}
+	
+	@RequestMapping(value = "/GetOneRelesed/{idPurchaseOrder}",method = RequestMethod.GET)
+	public List<PurchaseOrders>  getOneReleasedPurchaseOrder(@PathVariable("idPurchaseOrder") String idPurchaseOrder) {
+		return purchaseordersservice.getOneReleasedPurchaseOrder(idPurchaseOrder);
+	}
+	
+	@RequestMapping(value = "/GetOneOpen/{idPurchaseOrder}",method = RequestMethod.GET)
+	public List<PurchaseOrders>  getOneOpenPurchaseOrder(@PathVariable("idPurchaseOrder") String idPurchaseOrder) {
+		return purchaseordersservice.getOneOpenPurchaseOrder(idPurchaseOrder);
 	}
 }
