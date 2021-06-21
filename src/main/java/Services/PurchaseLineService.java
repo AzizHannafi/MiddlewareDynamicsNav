@@ -1,6 +1,8 @@
 package Services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import org.ksoap2.SoapEnvelope;
@@ -15,6 +17,8 @@ import Ntlm.NtlmTransport;
 public class PurchaseLineService {
 	Config config = new Config("BC130/WS/CRONUS%20France%20S.A./Page/PurechaseLine");
 	ArrayList<PurchaseLine> PurchaseLineList = new ArrayList<PurchaseLine>();
+	
+	
 	
 	
 	public PurchaseLine getOnePurchaseLine(String idPurchaseOrder,String LineNo) {
@@ -179,5 +183,68 @@ public class PurchaseLineService {
 			e.printStackTrace();
 		}
 	}
+
+	public HashMap<String, String> getItemInfo(){
+		HashMap<String, String> itemInfo= new HashMap<String, String>();
+		List<PurchaseLine> listLine= GetAllPurchaseLine();
+		for (int i=0; i<listLine.size();i++) {
+			if(itemInfo.containsValue(listLine.get(i).getDescription())) {
+				itemInfo.get(listLine.get(i).getDescription());
+				System.out.println(itemInfo.values());
+			}
+			itemInfo.put(listLine.get(i).getDescription(), listLine.get(i).getQuantity());
+		}
+		return itemInfo;
+	}
+	
+	
+	public List<PurchaseLine> listLine= GetAllPurchaseLine();
+	
+
+	
+	public List<PurchaseLine> getItemStats(){
+			
+		List<PurchaseLine> list = new ArrayList<PurchaseLine>();
+		List<PurchaseLine> listFinale = new ArrayList<PurchaseLine>();
+		List<PurchaseLine> TopTen = new ArrayList<PurchaseLine>();
+		PurchaseLine pl = new PurchaseLine();
+		for(int i=0;i<listLine.size();i++) {
+			pl = getOneStatsPurchase(listLine.get(i).getItemNo());
+			list.add(pl);
+			listFinale.add(pl);
+			}
+		
+		for(PurchaseLine line:listFinale) {
+			System.out.println(line.getDescription());
+		}
+		
+		System.out.println("********************************************");
+		HashSet<PurchaseLine> hashSet = new HashSet(listFinale);  
+		
+		  for (PurchaseLine line : hashSet) {
+	           System.out.println(line.getItemNo());
+	       }
+		
+		return listFinale;
+	}
+	
+	public PurchaseLine  getOneStatsPurchase(String noItem) {
+		
+		PurchaseLine purchaseLine = new PurchaseLine();
+		float quantity=0;
+		
+		for(int i=0; i<listLine.size();i++) {
+			if(listLine.get(i).getItemNo().equals(noItem)) {
+				quantity+=Float.parseFloat(PurchaseLineList.get(i).getQuantity().toString());
+				purchaseLine.setDescription(listLine.get(i).getDescription());
+				
+				purchaseLine.setItemNo(listLine.get(i).getItemNo());
+			}
+			purchaseLine.setQuantity(String.valueOf(quantity));
+		}
+		return purchaseLine;
+	}
+	
+	
 
 }

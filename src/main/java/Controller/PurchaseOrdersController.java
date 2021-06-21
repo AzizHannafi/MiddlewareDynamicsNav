@@ -31,6 +31,8 @@ public class PurchaseOrdersController {
 		return purchaseordersservice.getAllPurchaseOrder(locationCode);
 	}
 	
+	
+	
 	@RequestMapping(value = "/GetAll",method = RequestMethod.GET)
 	public List<PurchaseOrders> getAllOrder() {
 		return purchaseordersservice.getAllPurchaseOrder();

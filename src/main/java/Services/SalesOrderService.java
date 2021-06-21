@@ -408,9 +408,12 @@ public class SalesOrderService {
 					
 					//recuperation de la reponce 
 					result = (SoapObject) soapEnvelope.getResponse();
-					String NoLine=null;
-					String Unit_of_Measure_Code=null;
-					String Unit_of_Measure= null;
+					String NoLine="null";
+					String Unit_of_Measure_Code="null";
+					String Unit_of_Measure= "null";
+					String Description= "null";
+					String Quantity= "null";
+					
 					
 					for (int i = 0; i < result.getPropertyCount(); i++) {
 						
@@ -429,17 +432,22 @@ public class SalesOrderService {
 							}
 							if (ElementOfSalesLinestable.hasProperty("Unit_of_Measure")) {
 								Unit_of_Measure=ElementOfSalesLinestable.getProperty("Unit_of_Measure").toString();
+							}if (ElementOfSalesLinestable.hasProperty("Description")) {
+								Description=ElementOfSalesLinestable.getProperty("Description").toString();
+							}if (ElementOfSalesLinestable.hasProperty("Quantity")) {
+								Quantity=ElementOfSalesLinestable.getProperty("Quantity").toString();
 							}
 							
 							sl.setKey(ElementOfSalesLinestable.getProperty("Key").toString());
 							sl.setNo(NoLine);
 							sl.setType(ElementOfSalesLinestable.getProperty("Type").toString());
 							sl.setDocument_No(ElementOfSalesLinestable.getProperty("Document_No").toString());
-							sl.setLine_No(ElementOfSalesLinestable.getProperty("Line_No").toString());
-							sl.setQuantity(ElementOfSalesLinestable.getProperty("Quantity").toString());
+							sl.setDescription(Description);
+							//sl.setLine_No(ElementOfSalesLinestable.getProperty("Line_No").toString());
+							sl.setQuantity(Quantity);
 							sl.setUnit_of_Measure(Unit_of_Measure);
 							sl.setUnit_of_Measure_Code(Unit_of_Measure_Code);
-							sl.setQty_to_Invoice(ElementOfSalesLinestable.getProperty("Qty_to_Invoice").toString());
+							//sl.setQty_to_Invoice(ElementOfSalesLinestable.getProperty("Qty_to_Invoice").toString());
 							TableOfSaleLinePerElement.add(sl);
 							}
 						

@@ -343,6 +343,7 @@ public List<PurchaseOrders> GetAllOpenPurchaseOrders(){
 					Document_No="null",
 					Line_No="null",
 			 		itemNo="null",
+			 		Description="null",
 			 	    Quantity="null";
 			 
 			 for (int i = 0; i < result.getPropertyCount(); i++) {
@@ -376,6 +377,9 @@ public List<PurchaseOrders> GetAllOpenPurchaseOrders(){
 						if (ElementOfPurchaseLinetable.hasProperty("Quantity")) {
 							Quantity=ElementOfPurchaseLinetable.getProperty("Quantity").toString();
 						}
+						if (ElementOfPurchaseLinetable.hasProperty("Description")) {
+							Description=ElementOfPurchaseLinetable.getProperty("Description").toString();
+						}
 						pl.setItemNo(itemNo);
 						pl.setKey(Key);
 						pl.setUnit_of_Measure(Unit_of_Measure);
@@ -384,6 +388,7 @@ public List<PurchaseOrders> GetAllOpenPurchaseOrders(){
 						pl.setLine_No(Line_No);
 						pl.setQuantity(Quantity);
 						pl.setType(Type);
+						pl.setDescription(Description);
 						TableOfPurchaseLinePerElement.add(pl);
 				 }
 				 	if(oneElemnetofResult.hasProperty("Key")==true) {

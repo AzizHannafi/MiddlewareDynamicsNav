@@ -31,6 +31,11 @@ public class SalesOrderController {
 		return salesOrderService.GetAllSalesOrder(locationCode);
 	}
 	
+	@RequestMapping(value = "/GetAll",method = RequestMethod.GET)
+	public List<SalesOrder> getAllOrders() {
+		return salesOrderService.GetAllSalesOrder();
+	}
+	
 	@RequestMapping(value = "/GetAllReleasedOrder/{locationCode}",method = RequestMethod.GET)
 	public List<SalesOrder> GetAllReleasedOrder(@PathVariable("locationCode") String locationCode) {
 		return salesOrderService.GetAllReleasedSalesOrder(locationCode);

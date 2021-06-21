@@ -1,5 +1,6 @@
 package Controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -29,10 +30,27 @@ public class PurchaseLineController {
 	public List<PurchaseLine> getAllLine() {
 		return PurchaseLineService.GetAllPurchaseLine();
 	}
+	@RequestMapping(value = "/getItemsStats",method = RequestMethod.GET)
+	public List<PurchaseLine> getStats() {
+		return PurchaseLineService.getItemStats();
+	}
 	
+
+	@RequestMapping(value = "/GetOneStats/{noItem}",method = RequestMethod.GET)
+	public PurchaseLine getOneOrderStats(@PathVariable("noItem") String noItem) {
+		return PurchaseLineService.getOneStatsPurchase(noItem);
+	}
+	
+	
+
 	@RequestMapping(value = "/DeletePurchaseLine",method = RequestMethod.DELETE)
 	public void DeletePurchaseLine(@RequestBody Key key) {
 		PurchaseLineService.deletePurchaseLine(key);
+	}
+	
+	@RequestMapping(value = "/getItemInfo",method = RequestMethod.GET)
+	public HashMap<String, String> getItemInfo() {
+		return PurchaseLineService.getItemInfo();
 	}
 	
 }
